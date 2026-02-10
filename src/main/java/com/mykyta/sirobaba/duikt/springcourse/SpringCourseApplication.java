@@ -1,13 +1,21 @@
 package com.mykyta.sirobaba.duikt.springcourse;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.mykyta.sirobaba.duikt.springcourse.config.AppConfig;
+import com.mykyta.sirobaba.duikt.springcourse.services.NotificationService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-@SpringBootApplication
 public class SpringCourseApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringCourseApplication.class, args);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                AppConfig.class
+        );
+
+        NotificationService notificationService = context.getBean(NotificationService.class);
+
+        notificationService.sendAllNotifications("Hello Spring World!");
+
+        context.close();
     }
 
 }
